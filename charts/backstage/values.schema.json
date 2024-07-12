@@ -956,9 +956,13 @@
                                 },
                                 "backend": {
                                     "auth": {
-                                        "keys": [
+                                        "externalAccess": [
                                             {
-                                                "secret": "${BACKEND_SECRET}"
+                                                "options": {
+                                                    "secret": "${BACKEND_SECRET}",
+                                                    "subject": "legacy-default-config"
+                                                },
+                                                "type": "legacy"
                                             }
                                         ]
                                     },
@@ -4154,7 +4158,7 @@
                                     "type": "string"
                                 },
                                 "repository": {
-                                    "default": "janus-idp/backstage-showcase",
+                                    "default": "rhdh/rhdh-hub-rhel9",
                                     "title": "Backstage image repository",
                                     "type": "string"
                                 },
