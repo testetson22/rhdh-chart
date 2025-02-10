@@ -143,9 +143,17 @@ upstream:
       - name: temp
         mountPath: /tmp
     extraVolumes:
+      # -- Ephemeral volume that will contain the dynamic plugins installed by the initContainer below at start.
       - name: dynamic-plugins-root
-        persistentVolumeClaim:
-          claimName: '{{ printf "%s-dynamic-plugins-root" .Release.Name }}'
+        ephemeral:
+          volumeClaimTemplate:
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  # -- Size of the volume that will contain the dynamic plugins. It should be large enough to contain all the plugins.
+                  storage: 5Gi
       # Volume that will expose the `dynamic-plugins.yaml` file from the `dynamic-plugins` config map.
       # The `dynamic-plugins` config map is created by the helm chart from the content of the `global.dynamic` field.
       - name: dynamic-plugins
@@ -314,18 +322,6 @@ route:
     # --  Indicates the desired behavior for insecure connections to a route.
     # <br /> While each router may make its own decisions on which ports to expose, this is normally port 80. The only valid values are None, Redirect, or empty for disabled.
     insecureEdgeTerminationPolicy: "Redirect"
-
-dynamicPlugins:
-  cache:
-    # -- Spec of the dynamic plugins root volume claim.
-    # <br/> Note that, by default, this is set to use the default storage class, if available in the cluster.
-    volumeClaimSpec:
-      accessModes:
-        - ReadWriteOnce
-      resources:
-        requests:
-          storage: 5Gi
-      storageClassName: null
 
 # -- Test pod parameters
 test:
