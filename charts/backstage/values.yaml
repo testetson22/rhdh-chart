@@ -243,6 +243,8 @@ upstream:
   postgresql:
     enabled: true
     postgresqlDataDir: /var/lib/pgsql/data/userdata
+    serviceBindings:
+      enabled: true
     image:
       registry: quay.io
       repository: fedora/postgresql-15
@@ -338,3 +340,35 @@ test:
 
     # -- Test connection pod image tag. Note that the image needs to have both the `sh` and `curl` binaries in it.
     tag: latest
+
+orchestrator:
+  enabled: false
+  serverlessLogicOperator:
+    enabled: false
+  serverlessOperator:
+    enabled: false
+  sonataflowPlatform:
+    monitoring:
+      enabled: true
+    eventing:
+      broker:
+        name: ""
+        namespace: ""
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "1Gi"
+        cpu: "500m"
+    # -- Secret name for the user-created secret to connect an external DB
+    externalDBsecretRef: ""
+
+    # -- Name for the user-configured external Database
+    externalDBName: ""
+
+    # -- Image for the init container used by the create-db job
+    initContainerImage: busybox
+
+    # -- Image for the container used by the create-db job
+    createDBJobImage: "postgres:15"
