@@ -1,7 +1,7 @@
 
 # RHDH Backstage Helm Chart for OpenShift (Community Version)
 
-![Version: 4.2.0](https://img.shields.io/badge/Version-4.2.0-informational?style=flat-square)
+![Version: 4.2.1](https://img.shields.io/badge/Version-4.2.1-informational?style=flat-square)
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart for deploying Red Hat Developer Hub.
@@ -39,7 +39,7 @@ This chart bootstraps a [Backstage](https://backstage.io/docs/deployment/docker)
 
 ## Prerequisites
 
-- Kubernetes 1.25+ (OpenShift 4.12+)
+- Kubernetes 1.27+ ([OpenShift 4.14+](https://docs.redhat.com/en/documentation/openshift_container_platform/4.14/html-single/release_notes/index#ocp-4-14-about-this-release))
 - Helm 3.10+ or [latest release](https://github.com/helm/helm/releases)
 - PV provisioner support in the underlying infrastructure
 - [Backstage container image](https://backstage.io/docs/deployment/docker)
@@ -156,7 +156,7 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Requirements
 
-Kubernetes: `>= 1.19.0-0`
+Kubernetes: `>= 1.27.0-0`
 
 | Repository | Name | Version |
 |------------|------|---------|
