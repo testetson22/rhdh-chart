@@ -263,6 +263,10 @@ upstream:
         enabled: false
       containerSecurityContext:
         enabled: false
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
       resources:
         requests:
           cpu: 250m
